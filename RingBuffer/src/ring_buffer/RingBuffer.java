@@ -251,6 +251,34 @@ public class RingBuffer <T>{
 	
 	}
 	
+
+	
+	
+	/**
+	 * Removes an entry at the given index. Throws an unchecked
+	 * IndexOutOfBoundsException if the index is not in the valid 
+	 * range between 0 and usedSize - 1.
+	 * 
+	 * @param index The index at which to remove the entry.
+	 */
+	public void removeAtIndex(int index) {
+		
+		// Invalid Input Handling
+		if (index >= this.currentSize || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		final int size = this.currentSize;
+		for (int i = 0; i < size; i++) {
+			T elem = this.getFirst();
+			this.dropFirst();
+			if(i != index) {
+				this.append(elem);
+			}
+		}
+		
+		
+	}
 	/**
 	 * Resizes the ring buffer to the given size while keeping all entries. 
 	 * If the new size is smaller than the current maximum size of the 
@@ -313,6 +341,38 @@ public class RingBuffer <T>{
 		return false;
 	}
 	
+	/**
+	 * Returns the entry at the given index in range [0,..., usedSize-1].
+	 * Throws an unchecked IndexOutOfBoundsException if the index is not valid.
+	 * 
+	 * @param index The index of the entry that should be fetched.
+	 * @return The element in position index in the RingBuffer.
+	 */
+	public T get(int index){
+		if(index >= this.currentSize || index < 0) {
+			throw new IndexOutOfBoundsException("Index not in range");
+		}
+		return ringBuffer.get((this.tail + index) % this.size);
+	}
+	
+	/**
+	 * Sets the entry on the given index position to
+	 * the given element. Throws an unchecked IndexOutOfBoundsException
+	 * if the index is generally not in range, or is referring to 
+	 * a position in the ring buffer that is currently not 
+	 * in use.
+	 * 
+	 * @param index The position to set the entry for.
+	 * @param elem The element the entry should be.
+	 */
+	public void set(int index, T elem){
+		if (index >= this.currentSize || index < 0) {
+			throw new IndexOutOfBoundsException("Index not valid");
+		} else if (elem == null) {
+			throw new NullPointerException();
+		}
+		ringBuffer.set((this.tail + index) % this.size, elem);
+	}
 	
 	/**
 	 * Checks if a given object equals this object.
@@ -375,7 +435,7 @@ public class RingBuffer <T>{
 		str = "MAX " + this.size + ": [";
 		int index = this.tail;
 		for(int i = 0; i < this.currentSize; i++) {
-			str = str + ringBuffer.get(index).toString();
+			str = str + ringBuffer.get(index);
 			index = (index + 1) % this.size;
 			if(i < this.currentSize - 1) {
 				str = str + ", ";
@@ -385,36 +445,7 @@ public class RingBuffer <T>{
 		return str;
 	}
 	
-	/**
-	 * Returns the entry at the given index in range [0,..., usedSize-1].
-	 * Throws an unchecked IndexOutOfBoundsException if the index is not valid.
-	 * 
-	 * @param index The index of the entry that should be fetched.
-	 * @return The element in position index in the RingBuffer.
-	 */
-	public T get(int index){
-		if(index >= this.currentSize || index < 0) {
-			throw new IndexOutOfBoundsException("Index not in range");
-		}
-		return ringBuffer.get((this.tail + index) % this.size);
-	}
-	
-	/**
-	 * Sets the entry on the given index position to
-	 * the given element. Throws an unchecked IndexOutOfBoundsException
-	 * if the index is generally not in range, or is referring to 
-	 * a position in the ring buffer that is currently not 
-	 * in use.
-	 * 
-	 * @param index The position to set the entry for.
-	 * @param elem The element the entry should be.
-	 */
-	public void set(int index, T elem){
-		if(index >= this.currentSize || index < 0) {
-			throw new IndexOutOfBoundsException("Index not valid");
-		}
-		ringBuffer.set((this.tail + index) % this.size, elem);
-	}
+
 	
 	/**
 	 *  Returns true if the ring buffer contains at least one element. 
