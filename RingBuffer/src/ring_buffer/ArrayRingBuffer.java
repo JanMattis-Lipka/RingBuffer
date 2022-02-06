@@ -26,6 +26,7 @@ public class ArrayRingBuffer<T> extends RingBuffer<T> {
 	/**
 	 * {@inheritDoc}
 	 */
+	@SafeVarargs
 	public ArrayRingBuffer(int psize, T...ts) {
 		super(psize, ts);
 	}

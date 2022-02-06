@@ -197,6 +197,14 @@ public abstract class RingBuffer <T>{
 	}
 	
 	/**
+	 * Returns true if the ring buffer does not contain any elements.
+	 * @return If RingBuffer is empty.
+	 */
+	public boolean isEmpty() {
+		return this.currentSize == 0;
+	}
+	
+	/**
 	 * Returns the maximum size of the given ring buffer.
 	 * @return Maximum size of the RingBuffer.
 	 */
