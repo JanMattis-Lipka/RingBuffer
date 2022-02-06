@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @param <T> The type of elements that should be stored in the RingBuffer object.
  */
-public class RingBuffer <T>{
+public class ArrayRingBuffer <T>{
 
 	/* Variables for ring buffer operation:
 	 * head:		index where new element gets appended
@@ -34,7 +34,7 @@ public class RingBuffer <T>{
 	/**
 	 * Initializes a new RingBuffer Object with defaultSize.
 	 */
-	public RingBuffer() {
+	public ArrayRingBuffer() {
 		this.init();
 		ringBuffer = new ArrayList<T>(defaultSize);
 		this.fill();
@@ -59,7 +59,7 @@ public class RingBuffer <T>{
 	 *  				be appended to the RingBuffer.
 	 * */
 	@SafeVarargs
-	public RingBuffer(int psize, T... args) {
+	public ArrayRingBuffer(int psize, T... args) {
 		if(psize <= 0) throw new IllegalArgumentException("New size: " + psize);
 		
 		this.reset(psize);
@@ -302,7 +302,7 @@ public class RingBuffer <T>{
 		 * The new space would also very likely not fit the new size optimally, creating an
 		 * unnecessary overhead.
 		 */
-		RingBuffer<T> auxBuffer = new RingBuffer<T>(size); // new ringBuffer instance to copy to
+		ArrayRingBuffer<T> auxBuffer = new ArrayRingBuffer<T>(size); // new ringBuffer instance to copy to
 		
 		// store the smaller size
 		int useSize;
@@ -394,8 +394,8 @@ public class RingBuffer <T>{
 		//ok
 		if (obj == null 
 			|| !this.getClass().equals(obj.getClass()) 
-			|| this.currentSize != ((RingBuffer<T>)obj).currentSize 
-			|| this.size != ((RingBuffer<T>)obj).size) 
+			|| this.currentSize != ((ArrayRingBuffer<T>)obj).currentSize 
+			|| this.size != ((ArrayRingBuffer<T>)obj).size) 
 			{
 			
 			return false;
@@ -404,14 +404,14 @@ public class RingBuffer <T>{
 			if (this.currentSize != 0) {
 				for (int i = 0; i < this.currentSize; i++) {
 					T elem1 = this.getFirst();
-					T elem2 = (T) ((RingBuffer<T>)obj).getFirst();
+					T elem2 = (T) ((ArrayRingBuffer<T>)obj).getFirst();
 					if (!elem1.equals(elem2)) {
 						return false;
 					}
 					this.dropFirst();
 					this.append(elem1);
-					((RingBuffer<T>)obj).dropFirst();
-					((RingBuffer<T>)obj).append(elem2);
+					((ArrayRingBuffer<T>)obj).dropFirst();
+					((ArrayRingBuffer<T>)obj).append(elem2);
 					
 				}
 				return true;
