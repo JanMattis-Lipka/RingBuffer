@@ -3,7 +3,7 @@ package ring_buffer;
 import java.util.HashMap;
 
 /**
- * This class implements a ring buffer using an ArrayList as 
+ * This class implements a ring buffer using a HashMap as 
  * the underlying data structure to store entries.
  * @author Jan M. L.
  *
@@ -175,8 +175,7 @@ public class HashRingBuffer<T> extends RingBuffer<T> {
 		if (obj == null 
 			|| !this.getClass().equals(obj.getClass()) 
 			|| this.currentSize != ((HashRingBuffer<T>)obj).currentSize 
-			|| this.size != ((HashRingBuffer<T>)obj).size) 
-			{
+			|| this.size != ((HashRingBuffer<T>)obj).size) {
 			
 			return false;
 			

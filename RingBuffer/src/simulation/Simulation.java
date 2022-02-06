@@ -14,7 +14,14 @@ public class Simulation {
 		this.testUserFunctionality();
 	}
 	
-	
+	/**
+	 * Little terminal function to let users try out certain 
+	 * commands of the ring buffer.
+	 * It uses an ArrayRingBuffer of type String to store Objects.
+	 * 
+	 * However the general implementation could be used for all
+	 * objects except null objects.
+	 */
 	private void testUserFunctionality() {
 		
 		ArrayRingBuffer<String> buffer;
