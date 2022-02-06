@@ -1,6 +1,7 @@
-package ring_buffer;
+package simulation;
 
 import java.util.Scanner;
+import ring_buffer.*;
 
 public class Simulation {
 
