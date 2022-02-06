@@ -10,6 +10,7 @@ It features:
 
 Furthermore it comes with a little terminal simulation to test certain
 functionality for a String RingBuffer.
+Currently it does not support null elements.
   
 # Disclaimer: 
 This project has been originally uploaded to get familiar with git and github. You can technically still use it, but it might not be updated anymore, nor fulfil any high standards. Same goes for licensing, the implementation relies on ArrayLists, and those fall under Oracle's licensing.
