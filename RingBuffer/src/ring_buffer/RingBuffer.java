@@ -155,6 +155,25 @@ public class RingBuffer <T>{
 	}
 
 	/**
+	 * Returns the last element in the ring buffer.
+	 * Throws an unchecked BufferEmptyException 
+	 * if the ring buffer is empty.
+	 * 
+	 * @return The last element in the ring buffer.
+	 */
+	public T getLast() {
+		if(this.hasNext()) {
+			if(this.head > 0) {
+				return ringBuffer.get(this.head - 1);
+			}else {
+				return ringBuffer.get(this.size - 1);
+			}
+		}else {
+			throw new BufferEmptyException("Buffer Empty");
+		}
+	}
+	
+	/**
 	 * Removes the first element of the ring buffer.
 	 * Throws an unchecked BufferEmptyException if the 
 	 * ring buffer does not contain an element.
@@ -188,24 +207,7 @@ public class RingBuffer <T>{
 		}
 	}
 	
-	/**
-	 * Returns the last element in the ring buffer.
-	 * Throws an unchecked BufferEmptyException 
-	 * if the ring buffer is empty.
-	 * 
-	 * @return The last element in the ring buffer.
-	 */
-	public T getLast() {
-		if(this.hasNext()) {
-			if(this.head > 0) {
-				return ringBuffer.get(this.head - 1);
-			}else {
-				return ringBuffer.get(this.size - 1);
-			}
-		}else {
-			throw new BufferEmptyException("Buffer Empty");
-		}
-	}
+	
 	
 	/**
 	 * Removes a given element from the ring buffer.
@@ -279,6 +281,7 @@ public class RingBuffer <T>{
 		
 		
 	}
+	
 	/**
 	 * Resizes the ring buffer to the given size while keeping all entries. 
 	 * If the new size is smaller than the current maximum size of the 

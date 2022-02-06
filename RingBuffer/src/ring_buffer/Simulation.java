@@ -13,7 +13,6 @@ public class Simulation {
 		this.testUserFunctionality();
 	}
 	
-
 	
 	private void testUserFunctionality() {
 		
