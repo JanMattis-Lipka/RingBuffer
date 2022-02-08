@@ -24,7 +24,7 @@ public class Simulation {
 	 */
 	private void testUserFunctionality() {
 		
-		ArrayRingBuffer<String> buffer;
+		HashRingBuffer<String> buffer;
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Note: Currently this terminal only supports certain commands.");
@@ -47,7 +47,7 @@ public class Simulation {
 		}else {
 			size = Integer.parseInt(sizeString);
 		}
-		buffer = new ArrayRingBuffer<String>(size);
+		buffer = new HashRingBuffer<String>(size);
 		
 		String input = new String();
 		input = "";
