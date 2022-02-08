@@ -1,7 +1,9 @@
 # RingBuffer 
 This Java project features a RingBuffer implementation.
 A RingBuffer holds a specified amount of objects and overwrites the oldest
-object if the maximum size has already been hit. 
+object if the maximum size has already been hit. It can be used with an ArrayList 
+or a HashMap depending on what is most fitting.
+
 It features:
  1. append in O(1)
  2. dropFirst/Last in O(1)
@@ -16,6 +18,7 @@ It features:
  11. toString in O(n)
  12. hasNext, isEmpty, getUsedSize, getMaxSize in O(1)
  13. print in O(n)
+ 
 See comments / API for more information.
 
 Furthermore it comes with a little terminal simulation to test certain
